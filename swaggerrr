@@ -6576,3 +6576,42 @@ No links
 POST
 /api/hall-tickets/generate
 Generate a hall ticket for a confirmed seat allocation
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "allocationId": 0,
+  "examDate": "2026-06-25"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "hallTicketId": 0,
+  "hallTicketNumber": "string",
+  "candidateId": 0,
+  "windowId": 0,
+  "centreId": 0,
+  "allocationId": 0,
+  "roomNumber": "string",
+  "seatNumber": "string",
+  "examDate": "2026-06-25",
+  "generatedDate": "2026-06-25T16:54:13.510Z",
+  "status": "Generated"
+}
