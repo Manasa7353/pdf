@@ -1,0 +1,6578 @@
+Examination and Certification Management System - REST API documentation
+
+Contact CertifyPro Team
+Apache 2.0
+Servers
+
+http://localhost:8081 - Generated server url
+
+Authorize
+Question API (P1-16)
+CRUD, status management and filtering for question bank items
+
+
+
+DELETE
+/api/questions/{questionId}
+Soft-delete a question (sets status to Retired)
+
+
+Parameters
+Try it out
+Name	Description
+questionId *
+integer($int64)
+(path)
+questionId
+Responses
+Code	Description	Links
+200	
+OK
+
+No links
+
+GET
+/api/questions/{questionId}
+Get question details by ID
+
+
+Parameters
+Try it out
+Name	Description
+questionId *
+integer($int64)
+(path)
+questionId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "questionId": 0,
+  "programId": 0,
+  "topicTag": "string",
+  "difficulty": "Easy",
+  "questionText": "string",
+  "type": "MCQ",
+  "marks": 0,
+  "createdById": 0,
+  "status": "Active"
+}
+No links
+
+GET
+/api/questions
+List questions with optional filters (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+programId
+integer($int64)
+(query)
+programId
+topicTag
+string
+(query)
+topicTag
+difficulty
+string
+(query)
+difficulty
+type
+string
+(query)
+type
+status
+string
+(query)
+status
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "questionId": 0,
+      "programId": 0,
+      "topicTag": "string",
+      "difficulty": "Easy",
+      "questionText": "string",
+      "type": "MCQ",
+      "marks": 0,
+      "createdById": 0,
+      "status": "Active"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+PATCH
+/api/questions/{questionId}/status
+Change question status
+
+
+Parameters
+Try it out
+Name	Description
+questionId *
+integer($int64)
+(path)
+questionId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "questionId": 0,
+  "programId": 0,
+  "topicTag": "string",
+  "difficulty": "Easy",
+  "questionText": "string",
+  "type": "MCQ",
+  "marks": 0,
+  "createdById": 0,
+  "status": "Active"
+}
+No links
+
+POST
+/api/questions
+Create a new question
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "programId": 0,
+  "topicTag": "string",
+  "difficulty": "Easy",
+  "questionText": "string",
+  "type": "MCQ",
+  "marks": 1,
+  "createdById": 0,
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "questionId": 0,
+  "programId": 0,
+  "topicTag": "string",
+  "difficulty": "Easy",
+  "questionText": "string",
+  "type": "MCQ",
+  "marks": 0,
+  "createdById": 0,
+  "status": "Active"
+}
+No links
+
+PUT
+/api/questions/{questionId}
+Update question details
+
+
+Parameters
+Try it out
+Name	Description
+questionId *
+integer($int64)
+(path)
+questionId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "programId": 0,
+  "topicTag": "string",
+  "difficulty": "Easy",
+  "questionText": "string",
+  "type": "MCQ",
+  "marks": 1,
+  "createdById": 0,
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "questionId": 0,
+  "programId": 0,
+  "topicTag": "string",
+  "difficulty": "Easy",
+  "questionText": "string",
+  "type": "MCQ",
+  "marks": 0,
+  "createdById": 0,
+  "status": "Active"
+}
+No links
+Audit Log API (P1-11)
+Immutable audit trail of system actions
+
+
+
+GET
+/api/audit-logs
+List audit logs with optional userId/module/action filters (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+userId
+integer($int64)
+(query)
+userId
+module
+string
+(query)
+module
+action
+string
+(query)
+action
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "auditId": 0,
+      "userId": 0,
+      "action": "string",
+      "module": "string",
+      "entityId": "string",
+      "timestamp": "2026-06-25T16:51:01.359Z"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+GET
+/api/audit-logs/{auditId}
+Get audit log entry by ID
+
+
+Parameters
+Try it out
+Name	Description
+auditId *
+integer($int64)
+(path)
+auditId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "auditId": 0,
+  "userId": 0,
+  "action": "string",
+  "module": "string",
+  "entityId": "string",
+  "timestamp": "2026-06-25T16:51:01.379Z"
+}
+No links
+
+POST
+/api/audit-logs
+Record a new audit log entry
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "userId": 0,
+  "action": "string",
+  "module": "string",
+  "entityId": "string"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "auditId": 0,
+  "userId": 0,
+  "action": "string",
+  "module": "string",
+  "entityId": "string",
+  "timestamp": "2026-06-25T16:51:01.407Z"
+}
+No links
+Programme Enrolment API (P1-35)
+Candidate enrolment into certification programmes
+
+
+
+GET
+/api/enrolments/{enrolmentId}
+Get enrolment details by ID
+
+
+Parameters
+Try it out
+Name	Description
+enrolmentId *
+integer($int64)
+(path)
+enrolmentId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "enrolmentId": 0,
+  "candidateId": 0,
+  "programId": 0,
+  "enrolmentDate": "2026-06-25",
+  "eligibilityStatus": "Eligible",
+  "attemptsUsed": 0,
+  "maxAttempts": 0,
+  "status": "Active"
+}
+No links
+
+GET
+/api/enrolments
+List enrolments, optionally filtered by candidateId (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+candidateId
+integer($int64)
+(query)
+candidateId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "enrolmentId": 0,
+      "candidateId": 0,
+      "programId": 0,
+      "enrolmentDate": "2026-06-25",
+      "eligibilityStatus": "Eligible",
+      "attemptsUsed": 0,
+      "maxAttempts": 0,
+      "status": "Active"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+PATCH
+/api/enrolments/{enrolmentId}/withdraw
+Withdraw an enrolment
+
+
+Parameters
+Try it out
+Name	Description
+enrolmentId *
+integer($int64)
+(path)
+enrolmentId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "enrolmentId": 0,
+  "candidateId": 0,
+  "programId": 0,
+  "enrolmentDate": "2026-06-25",
+  "eligibilityStatus": "Eligible",
+  "attemptsUsed": 0,
+  "maxAttempts": 0,
+  "status": "Active"
+}
+No links
+
+POST
+/api/enrolments
+Enrol a candidate into a certification programme
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "candidateId": 0,
+  "programId": 0,
+  "maxAttempts": 0
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "enrolmentId": 0,
+  "candidateId": 0,
+  "programId": 0,
+  "enrolmentDate": "2026-06-25",
+  "eligibilityStatus": "Eligible",
+  "attemptsUsed": 0,
+  "maxAttempts": 0,
+  "status": "Active"
+}
+No links
+
+PUT
+/api/enrolments/{enrolmentId}
+Update enrolment details
+
+
+Parameters
+Try it out
+Name	Description
+enrolmentId *
+integer($int64)
+(path)
+enrolmentId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "maxAttempts": 0,
+  "attemptsUsed": 0,
+  "eligibilityStatus": "Eligible",
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "enrolmentId": 0,
+  "candidateId": 0,
+  "programId": 0,
+  "enrolmentDate": "2026-06-25",
+  "eligibilityStatus": "Eligible",
+  "attemptsUsed": 0,
+  "maxAttempts": 0,
+  "status": "Active"
+}
+No links
+
+PUT
+/api/enrolments/{enrolmentId}/eligibility
+Update the eligibility status of an enrolment
+
+
+Parameters
+Try it out
+Name	Description
+enrolmentId *
+integer($int64)
+(path)
+enrolmentId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "eligibilityStatus": "Eligible"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "enrolmentId": 0,
+  "candidateId": 0,
+  "programId": 0,
+  "enrolmentDate": "2026-06-25",
+  "eligibilityStatus": "Eligible",
+  "attemptsUsed": 0,
+  "maxAttempts": 0,
+  "status": "Active"
+}
+No links
+Certificate API (P1-20)
+Issuance, verification and status management of certificates
+
+
+
+GET
+/api/certificates
+List certificates with optional candidateId/status filters (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+candidateId
+integer($int64)
+(query)
+candidateId
+status
+string
+(query)
+status
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "certificateId": 0,
+      "candidateId": 0,
+      "programId": 0,
+      "certificateNumber": "string",
+      "issuedDate": "2026-06-25",
+      "validUntil": "2026-06-25",
+      "issuedById": 0,
+      "status": "Valid"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+GET
+/api/certificates/{certificateId}
+Get certificate details by ID
+
+
+Parameters
+Try it out
+Name	Description
+certificateId *
+integer($int64)
+(path)
+certificateId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "certificateId": 0,
+  "candidateId": 0,
+  "programId": 0,
+  "certificateNumber": "string",
+  "issuedDate": "2026-06-25",
+  "validUntil": "2026-06-25",
+  "issuedById": 0,
+  "status": "Valid"
+}
+No links
+
+GET
+/api/certificates/verify/{certificateNumber}
+Publicly verify a certificate by its certificate number
+
+
+Parameters
+Try it out
+Name	Description
+certificateNumber *
+string
+(path)
+certificateNumber
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "certificateId": 0,
+  "candidateId": 0,
+  "programId": 0,
+  "certificateNumber": "string",
+  "issuedDate": "2026-06-25",
+  "validUntil": "2026-06-25",
+  "issuedById": 0,
+  "status": "Valid"
+}
+No links
+
+PATCH
+/api/certificates/{certificateId}/status
+Change certificate status (e.g., revoke or suspend)
+
+
+Parameters
+Try it out
+Name	Description
+certificateId *
+integer($int64)
+(path)
+certificateId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "status": "Valid"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "certificateId": 0,
+  "candidateId": 0,
+  "programId": 0,
+  "certificateNumber": "string",
+  "issuedDate": "2026-06-25",
+  "validUntil": "2026-06-25",
+  "issuedById": 0,
+  "status": "Valid"
+}
+No links
+
+POST
+/api/certificates
+Issue a new certificate
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "candidateId": 0,
+  "programId": 0,
+  "validityYears": 1,
+  "issuedById": 0
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "certificateId": 0,
+  "candidateId": 0,
+  "programId": 0,
+  "certificateNumber": "string",
+  "issuedDate": "2026-06-25",
+  "validUntil": "2026-06-25",
+  "issuedById": 0,
+  "status": "Valid"
+}
+No links
+Eligibility API (P1-13)
+Eligibility checking for candidate programme enrolment
+
+
+
+GET
+/api/enrolments/{enrolmentId}
+Get enrolment details by ID
+
+
+Parameters
+Try it out
+Name	Description
+enrolmentId *
+integer($int64)
+(path)
+enrolmentId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "enrolmentId": 0,
+  "candidateId": 0,
+  "programId": 0,
+  "enrolmentDate": "2026-06-25",
+  "eligibilityStatus": "Eligible",
+  "attemptsUsed": 0,
+  "maxAttempts": 0,
+  "status": "Active"
+}
+No links
+
+GET
+/api/enrolments
+List enrolments, optionally filtered by candidateId (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+candidateId
+integer($int64)
+(query)
+candidateId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "enrolmentId": 0,
+      "candidateId": 0,
+      "programId": 0,
+      "enrolmentDate": "2026-06-25",
+      "eligibilityStatus": "Eligible",
+      "attemptsUsed": 0,
+      "maxAttempts": 0,
+      "status": "Active"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+POST
+/api/enrolments
+Enrol a candidate into a certification programme
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "candidateId": 0,
+  "programId": 0,
+  "maxAttempts": 0
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "enrolmentId": 0,
+  "candidateId": 0,
+  "programId": 0,
+  "enrolmentDate": "2026-06-25",
+  "eligibilityStatus": "Eligible",
+  "attemptsUsed": 0,
+  "maxAttempts": 0,
+  "status": "Active"
+}
+No links
+
+POST
+/api/eligibility/check
+Check whether a candidate is eligible for a certification programme
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "candidateId": 0,
+  "programId": 0
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "eligible": true,
+  "reason": "string"
+}
+No links
+
+PUT
+/api/enrolments/{enrolmentId}
+Update enrolment details
+
+
+Parameters
+Try it out
+Name	Description
+enrolmentId *
+integer($int64)
+(path)
+enrolmentId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "maxAttempts": 0,
+  "attemptsUsed": 0,
+  "eligibilityStatus": "Eligible",
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "enrolmentId": 0,
+  "candidateId": 0,
+  "programId": 0,
+  "enrolmentDate": "2026-06-25",
+  "eligibilityStatus": "Eligible",
+  "attemptsUsed": 0,
+  "maxAttempts": 0,
+  "status": "Active"
+}
+No links
+Renewal API (P1-21)
+Submission and review of certificate renewal applications
+
+
+
+GET
+/api/renewals
+List renewal applications with optional candidateId/certificateId/status filters (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+candidateId
+integer($int64)
+(query)
+candidateId
+certificateId
+integer($int64)
+(query)
+certificateId
+status
+string
+(query)
+status
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "renewalId": 0,
+      "certificateId": 0,
+      "candidateId": 0,
+      "cpdPointsSubmitted": 0,
+      "applicationDate": "2026-06-25",
+      "reviewedById": 0,
+      "newValidUntil": "2026-06-25",
+      "status": "Submitted"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+GET
+/api/renewals/{renewalId}
+Get renewal application details by ID
+
+
+Parameters
+Try it out
+Name	Description
+renewalId *
+integer($int64)
+(path)
+renewalId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "renewalId": 0,
+  "certificateId": 0,
+  "candidateId": 0,
+  "cpdPointsSubmitted": 0,
+  "applicationDate": "2026-06-25",
+  "reviewedById": 0,
+  "newValidUntil": "2026-06-25",
+  "status": "Submitted"
+}
+No links
+
+GET
+/api/renewals/by-status/{status}
+List renewals by status
+
+
+Parameters
+Try it out
+Name	Description
+status *
+string
+(path)
+status
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "renewalId": 0,
+      "certificateId": 0,
+      "candidateId": 0,
+      "cpdPointsSubmitted": 0,
+      "applicationDate": "2026-06-25",
+      "reviewedById": 0,
+      "newValidUntil": "2026-06-25",
+      "status": "Submitted"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+GET
+/api/renewals/by-certificate/{certificateId}
+Get renewal history for a certificate
+
+
+Parameters
+Try it out
+Name	Description
+certificateId *
+integer($int64)
+(path)
+certificateId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "renewalId": 0,
+      "certificateId": 0,
+      "candidateId": 0,
+      "cpdPointsSubmitted": 0,
+      "applicationDate": "2026-06-25",
+      "reviewedById": 0,
+      "newValidUntil": "2026-06-25",
+      "status": "Submitted"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+GET
+/api/renewals/by-candidate/{candidateId}
+Get all renewals for a candidate
+
+
+Parameters
+Try it out
+Name	Description
+candidateId *
+integer($int64)
+(path)
+candidateId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "renewalId": 0,
+      "certificateId": 0,
+      "candidateId": 0,
+      "cpdPointsSubmitted": 0,
+      "applicationDate": "2026-06-25",
+      "reviewedById": 0,
+      "newValidUntil": "2026-06-25",
+      "status": "Submitted"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+PATCH
+/api/renewals/{renewalId}/review
+Review a renewal application (approve or reject)
+
+
+Parameters
+Try it out
+Name	Description
+renewalId *
+integer($int64)
+(path)
+renewalId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "reviewedById": 0,
+  "approved": true,
+  "newValidUntil": "2026-06-25"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "renewalId": 0,
+  "certificateId": 0,
+  "candidateId": 0,
+  "cpdPointsSubmitted": 0,
+  "applicationDate": "2026-06-25",
+  "reviewedById": 0,
+  "newValidUntil": "2026-06-25",
+  "status": "Submitted"
+}
+No links
+
+POST
+/api/renewals
+Submit a new renewal application
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "certificateId": 0,
+  "candidateId": 0,
+  "cpdPointsSubmitted": 0
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "renewalId": 0,
+  "certificateId": 0,
+  "candidateId": 0,
+  "cpdPointsSubmitted": 0,
+  "applicationDate": "2026-06-25",
+  "reviewedById": 0,
+  "newValidUntil": "2026-06-25",
+  "status": "Submitted"
+}
+No links
+Analytics API (P1-22)
+Aggregated analytics metrics (scaffold stubs)
+
+
+
+GET
+/api/analytics/pass-rates
+Get pass rates for a program within an exam window (stub)
+
+
+Parameters
+Try it out
+Name	Description
+programId *
+integer($int64)
+(query)
+programId
+windowId *
+integer($int64)
+(query)
+windowId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "additionalProp1": {},
+  "additionalProp2": {},
+  "additionalProp3": {}
+}
+No links
+
+GET
+/api/analytics/grade-distribution
+Get grade distribution for an exam window (stub)
+
+
+Parameters
+Try it out
+Name	Description
+windowId *
+integer($int64)
+(query)
+windowId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "additionalProp1": {},
+  "additionalProp2": {},
+  "additionalProp3": {}
+}
+No links
+
+GET
+/api/analytics/certification-stats
+Get overall certification statistics (stub)
+
+
+Parameters
+Try it out
+No parameters
+
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "additionalProp1": {},
+  "additionalProp2": {},
+  "additionalProp3": {}
+}
+No links
+
+GET
+/api/analytics/centre-performance
+Get performance metrics for a test centre (stub)
+
+
+Parameters
+Try it out
+Name	Description
+centreId *
+integer($int64)
+(query)
+centreId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "additionalProp1": {},
+  "additionalProp2": {},
+  "additionalProp3": {}
+}
+No links
+
+GET
+/api/analytics/attempt-utilisation
+Get attempt utilisation for a program (stub)
+
+
+Parameters
+Try it out
+Name	Description
+programId *
+integer($int64)
+(query)
+programId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "additionalProp1": {},
+  "additionalProp2": {},
+  "additionalProp3": {}
+}
+No links
+Question Paper API (P1-17)
+Question paper management, status workflow and question composition
+
+
+
+DELETE
+/api/question-papers/{paperId}/questions/{questionId}
+Remove a question from the paper and recompute total marks
+
+
+Parameters
+Try it out
+Name	Description
+paperId *
+integer($int64)
+(path)
+paperId
+questionId *
+integer($int64)
+(path)
+questionId
+Responses
+Code	Description	Links
+200	
+OK
+
+No links
+
+GET
+/api/question-papers/{paperId}
+Get question paper details (including its questions) by ID
+
+
+Parameters
+Try it out
+Name	Description
+paperId *
+integer($int64)
+(path)
+paperId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "paperId": 0,
+  "windowId": 0,
+  "programId": 0,
+  "paperCode": "string",
+  "totalMarks": 0,
+  "duration": 0,
+  "instructionsRef": "string",
+  "createdById": 0,
+  "status": "Draft",
+  "questions": [
+    {
+      "paperQuestionId": 0,
+      "paperId": 0,
+      "questionId": 0,
+      "sequenceOrder": 0,
+      "marksAllocated": 0
+    }
+  ]
+}
+No links
+
+GET
+/api/question-papers
+List question papers, optionally filtered by windowId (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+windowId
+integer($int64)
+(query)
+windowId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "paperId": 0,
+      "windowId": 0,
+      "programId": 0,
+      "paperCode": "string",
+      "totalMarks": 0,
+      "duration": 0,
+      "instructionsRef": "string",
+      "createdById": 0,
+      "status": "Draft",
+      "questions": [
+        {
+          "paperQuestionId": 0,
+          "paperId": 0,
+          "questionId": 0,
+          "sequenceOrder": 0,
+          "marksAllocated": 0
+        }
+      ]
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+PATCH
+/api/question-papers/{paperId}/status
+Change question paper status
+
+
+Parameters
+Try it out
+Name	Description
+paperId *
+integer($int64)
+(path)
+paperId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "status": "Draft"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "paperId": 0,
+  "windowId": 0,
+  "programId": 0,
+  "paperCode": "string",
+  "totalMarks": 0,
+  "duration": 0,
+  "instructionsRef": "string",
+  "createdById": 0,
+  "status": "Draft",
+  "questions": [
+    {
+      "paperQuestionId": 0,
+      "paperId": 0,
+      "questionId": 0,
+      "sequenceOrder": 0,
+      "marksAllocated": 0
+    }
+  ]
+}
+No links
+
+POST
+/api/question-papers
+Create a new question paper
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "windowId": 0,
+  "programId": 0,
+  "paperCode": "string",
+  "duration": 0,
+  "instructionsRef": "string",
+  "createdById": 0,
+  "status": "Draft"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "paperId": 0,
+  "windowId": 0,
+  "programId": 0,
+  "paperCode": "string",
+  "totalMarks": 0,
+  "duration": 0,
+  "instructionsRef": "string",
+  "createdById": 0,
+  "status": "Draft",
+  "questions": [
+    {
+      "paperQuestionId": 0,
+      "paperId": 0,
+      "questionId": 0,
+      "sequenceOrder": 0,
+      "marksAllocated": 0
+    }
+  ]
+}
+No links
+
+POST
+/api/question-papers/{paperId}/questions
+Add a question to the paper and recompute total marks (blocked when finalised)
+
+
+Parameters
+Try it out
+Name	Description
+paperId *
+integer($int64)
+(path)
+paperId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "questionId": 0,
+  "sequenceOrder": 0,
+  "marksAllocated": 1
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "paperId": 0,
+  "windowId": 0,
+  "programId": 0,
+  "paperCode": "string",
+  "totalMarks": 0,
+  "duration": 0,
+  "instructionsRef": "string",
+  "createdById": 0,
+  "status": "Draft",
+  "questions": [
+    {
+      "paperQuestionId": 0,
+      "paperId": 0,
+      "questionId": 0,
+      "sequenceOrder": 0,
+      "marksAllocated": 0
+    }
+  ]
+}
+No links
+
+PUT
+/api/question-papers/{paperId}
+Update question paper metadata (blocked when finalised)
+
+
+Parameters
+Try it out
+Name	Description
+paperId *
+integer($int64)
+(path)
+paperId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "windowId": 0,
+  "programId": 0,
+  "paperCode": "string",
+  "duration": 0,
+  "instructionsRef": "string",
+  "createdById": 0,
+  "status": "Draft"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "paperId": 0,
+  "windowId": 0,
+  "programId": 0,
+  "paperCode": "string",
+  "totalMarks": 0,
+  "duration": 0,
+  "instructionsRef": "string",
+  "createdById": 0,
+  "status": "Draft",
+  "questions": [
+    {
+      "paperQuestionId": 0,
+      "paperId": 0,
+      "questionId": 0,
+      "sequenceOrder": 0,
+      "marksAllocated": 0
+    }
+  ]
+}
+No links
+Certification Programme API (P1-34)
+CRUD and status management for certification programmes
+
+
+
+GET
+/api/programmes/{programId}
+Get certification programme details by ID
+
+
+Parameters
+Try it out
+Name	Description
+programId *
+integer($int64)
+(path)
+programId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "programId": 0,
+  "programName": "string",
+  "body": "string",
+  "level": "Foundation",
+  "eligibilityCriteria": "string",
+  "examFee": 0,
+  "validityYears": 0,
+  "maxAttempts": 0,
+  "status": "Active"
+}
+No links
+
+GET
+/api/programmes
+List certification programmes with optional level/status/body filters (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+level
+string
+(query)
+level
+status
+string
+(query)
+status
+body
+string
+(query)
+body
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "programId": 0,
+      "programName": "string",
+      "body": "string",
+      "level": "Foundation",
+      "eligibilityCriteria": "string",
+      "examFee": 0,
+      "validityYears": 0,
+      "maxAttempts": 0,
+      "status": "Active"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+PATCH
+/api/programmes/{programId}/status
+Change certification programme status
+
+
+Parameters
+Try it out
+Name	Description
+programId *
+integer($int64)
+(path)
+programId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "programId": 0,
+  "programName": "string",
+  "body": "string",
+  "level": "Foundation",
+  "eligibilityCriteria": "string",
+  "examFee": 0,
+  "validityYears": 0,
+  "maxAttempts": 0,
+  "status": "Active"
+}
+No links
+
+POST
+/api/programmes
+Create a new certification programme
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "programName": "string",
+  "body": "string",
+  "level": "Foundation",
+  "eligibilityCriteria": "string",
+  "examFee": 0,
+  "validityYears": 1,
+  "maxAttempts": 1,
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "programId": 0,
+  "programName": "string",
+  "body": "string",
+  "level": "Foundation",
+  "eligibilityCriteria": "string",
+  "examFee": 0,
+  "validityYears": 0,
+  "maxAttempts": 0,
+  "status": "Active"
+}
+No links
+
+PUT
+/api/programmes/{programId}
+Update certification programme details
+
+
+Parameters
+Try it out
+Name	Description
+programId *
+integer($int64)
+(path)
+programId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "programName": "string",
+  "body": "string",
+  "level": "Foundation",
+  "eligibilityCriteria": "string",
+  "examFee": 0,
+  "validityYears": 1,
+  "maxAttempts": 1,
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "programId": 0,
+  "programName": "string",
+  "body": "string",
+  "level": "Foundation",
+  "eligibilityCriteria": "string",
+  "examFee": 0,
+  "validityYears": 0,
+  "maxAttempts": 0,
+  "status": "Active"
+}
+No links
+User Registration API (P1-9)
+Registration and management of users
+
+
+
+GET
+/api/users/{userId}
+Get user details by ID
+
+
+Parameters
+Try it out
+Name	Description
+userId *
+integer($int64)
+(path)
+userId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "userId": 0,
+  "name": "string",
+  "role": "Candidate",
+  "email": "string",
+  "phone": "string",
+  "status": "Active"
+}
+No links
+
+GET
+/api/users
+List users with optional role/status/name filters (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+role
+string
+(query)
+role
+status
+string
+(query)
+status
+name
+string
+(query)
+name
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "userId": 0,
+      "name": "string",
+      "role": "Candidate",
+      "email": "string",
+      "phone": "string",
+      "status": "Active"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+PATCH
+/api/users/{userId}/status
+Change user status (e.g., suspend or deactivate)
+
+
+Parameters
+Try it out
+Name	Description
+userId *
+integer($int64)
+(path)
+userId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "userId": 0,
+  "name": "string",
+  "role": "Candidate",
+  "email": "string",
+  "phone": "string",
+  "status": "Active"
+}
+No links
+
+POST
+/api/users
+Create a user of any role (Admin only)
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "role": "Candidate",
+  "email": "string",
+  "phone": "string",
+  "password": "r|KmNUnR))C}rO:x6+m!G^rhAHpDtS[l{^FC!NMzr4o@wm&fhyx",
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "userId": 0,
+  "name": "string",
+  "role": "Candidate",
+  "email": "string",
+  "phone": "string",
+  "status": "Active"
+}
+No links
+
+POST
+/api/users/register
+Public self-registration (Candidate role only)
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "role": "Candidate",
+  "email": "string",
+  "phone": "string",
+  "password": "XU2P6lt]n{>a0Bo5?*os{g[Vq;zZJ4DGJx01S<31&Q:#b%up;Ab,.Dfmi_DlwI0a;e? <zsx:)kW>DYY:cnm!Z7",
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "userId": 0,
+  "name": "string",
+  "role": "Candidate",
+  "email": "string",
+  "phone": "string",
+  "status": "Active"
+}
+No links
+
+PUT
+/api/users/{userId}
+Update user details
+
+
+Parameters
+Try it out
+Name	Description
+userId *
+integer($int64)
+(path)
+userId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "name": "string",
+  "role": "Candidate",
+  "email": "string",
+  "phone": "string",
+  "password": "e8y'+]8v?h{+P\"9`P`]Ks:k}lk_1NR&V=#!ADkvyjq\\",
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "userId": 0,
+  "name": "string",
+  "role": "Candidate",
+  "email": "string",
+  "phone": "string",
+  "status": "Active"
+}
+No links
+Login API (P1-10)
+Lightweight authentication endpoints (scaffold, no Spring Security)
+
+
+
+GET
+/api/auth/me
+Get the current authenticated user's details
+
+
+Parameters
+Try it out
+Name	Description
+userId *
+integer($int64)
+(query)
+userId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "userId": 0,
+  "name": "string",
+  "role": "Candidate",
+  "email": "string",
+  "phone": "string",
+  "status": "Active"
+}
+No links
+
+POST
+/api/auth/refresh
+Issue a fresh token
+
+
+Parameters
+Try it out
+No parameters
+
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "token": "string",
+  "userId": 0,
+  "role": "Candidate",
+  "email": "string"
+}
+No links
+
+POST
+/api/auth/logout
+Log out the current user
+
+
+Parameters
+Try it out
+No parameters
+
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "additionalProp1": "string",
+  "additionalProp2": "string",
+  "additionalProp3": "string"
+}
+No links
+
+POST
+/api/auth/login
+Authenticate a user and issue a token
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "email": "string",
+  "password": "string"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "token": "string",
+  "userId": 0,
+  "role": "Candidate",
+  "email": "string"
+}
+No links
+Test Centre Management
+CRUD and status management for test centres (P1-33)
+
+
+
+GET
+/api/test-centres/{centreId}
+Get test centre details by ID
+
+
+Parameters
+Try it out
+Name	Description
+centreId *
+integer($int64)
+(path)
+centreId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "centreId": 0,
+  "centreName": "string",
+  "city": "string",
+  "address": "string",
+  "capacity": 0,
+  "contactPerson": "string",
+  "status": "Active"
+}
+No links
+
+GET
+/api/test-centres
+List test centres with optional city/status filters (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+city
+string
+(query)
+city
+status
+string
+(query)
+status
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "centreId": 0,
+      "centreName": "string",
+      "city": "string",
+      "address": "string",
+      "capacity": 0,
+      "contactPerson": "string",
+      "status": "Active"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+PATCH
+/api/test-centres/{centreId}/status
+Change centre status (e.g., blacklist a centre)
+
+
+Parameters
+Try it out
+Name	Description
+centreId *
+integer($int64)
+(path)
+centreId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "centreId": 0,
+  "centreName": "string",
+  "city": "string",
+  "address": "string",
+  "capacity": 0,
+  "contactPerson": "string",
+  "status": "Active"
+}
+No links
+
+POST
+/api/test-centres
+Create a new test centre
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "centreName": "string",
+  "city": "string",
+  "address": "string",
+  "capacity": 1,
+  "contactPerson": "string",
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "centreId": 0,
+  "centreName": "string",
+  "city": "string",
+  "address": "string",
+  "capacity": 0,
+  "contactPerson": "string",
+  "status": "Active"
+}
+No links
+
+PUT
+/api/test-centres/{centreId}
+Update test centre details
+
+
+Parameters
+Try it out
+Name	Description
+centreId *
+integer($int64)
+(path)
+centreId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "centreName": "string",
+  "city": "string",
+  "address": "string",
+  "capacity": 1,
+  "contactPerson": "string",
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "centreId": 0,
+  "centreName": "string",
+  "city": "string",
+  "address": "string",
+  "capacity": 0,
+  "contactPerson": "string",
+  "status": "Active"
+}
+No links
+Analytics API - Reports (P1-22)
+Generation and retrieval of examination reports
+
+
+
+GET
+/api/reports/{reportId}
+Get examination report by ID
+
+
+Parameters
+Try it out
+Name	Description
+reportId *
+integer($int64)
+(path)
+reportId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "reportId": 0,
+  "scope": "Program",
+  "metrics": "string",
+  "generatedDate": "2026-06-25"
+}
+No links
+
+POST
+/api/reports
+Generate a new examination report
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "scope": "Program",
+  "metrics": "string"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "reportId": 0,
+  "scope": "Program",
+  "metrics": "string",
+  "generatedDate": "2026-06-25"
+}
+No links
+Exam Window API (P1-14)
+Scheduling and management of examination windows
+
+
+
+GET
+/api/exam-windows/{windowId}
+Get exam window details by ID
+
+
+Parameters
+Try it out
+Name	Description
+windowId *
+integer($int64)
+(path)
+windowId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "windowId": 0,
+  "programId": 0,
+  "examName": "string",
+  "startDate": "2026-06-25",
+  "endDate": "2026-06-25",
+  "registrationDeadline": "2026-06-25",
+  "resultDate": "2026-06-25",
+  "status": "Upcoming"
+}
+No links
+
+GET
+/api/exam-windows
+List exam windows with optional programId/status filters (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+programId
+integer($int64)
+(query)
+programId
+status
+string
+(query)
+status
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "windowId": 0,
+      "programId": 0,
+      "examName": "string",
+      "startDate": "2026-06-25",
+      "endDate": "2026-06-25",
+      "registrationDeadline": "2026-06-25",
+      "resultDate": "2026-06-25",
+      "status": "Upcoming"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+PATCH
+/api/exam-windows/{windowId}/status
+Change exam window status
+
+
+Parameters
+Try it out
+Name	Description
+windowId *
+integer($int64)
+(path)
+windowId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "status": "Upcoming"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "windowId": 0,
+  "programId": 0,
+  "examName": "string",
+  "startDate": "2026-06-25",
+  "endDate": "2026-06-25",
+  "registrationDeadline": "2026-06-25",
+  "resultDate": "2026-06-25",
+  "status": "Upcoming"
+}
+No links
+
+POST
+/api/exam-windows
+Create a new exam window
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "programId": 0,
+  "examName": "string",
+  "startDate": "2026-06-25",
+  "endDate": "2026-06-25",
+  "registrationDeadline": "2026-06-25",
+  "resultDate": "2026-06-25",
+  "status": "Upcoming"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "windowId": 0,
+  "programId": 0,
+  "examName": "string",
+  "startDate": "2026-06-25",
+  "endDate": "2026-06-25",
+  "registrationDeadline": "2026-06-25",
+  "resultDate": "2026-06-25",
+  "status": "Upcoming"
+}
+No links
+
+PUT
+/api/exam-windows/{windowId}
+Update exam window details
+
+
+Parameters
+Try it out
+Name	Description
+windowId *
+integer($int64)
+(path)
+windowId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "programId": 0,
+  "examName": "string",
+  "startDate": "2026-06-25",
+  "endDate": "2026-06-25",
+  "registrationDeadline": "2026-06-25",
+  "resultDate": "2026-06-25",
+  "status": "Upcoming"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "windowId": 0,
+  "programId": 0,
+  "examName": "string",
+  "startDate": "2026-06-25",
+  "endDate": "2026-06-25",
+  "registrationDeadline": "2026-06-25",
+  "resultDate": "2026-06-25",
+  "status": "Upcoming"
+}
+No links
+Seat Allocation API (P1-15)
+Seat allocation and hall ticket management for exam windows
+
+
+
+GET
+/api/seat-allocations/{allocationId}
+Get seat allocation details by ID
+
+
+Parameters
+Try it out
+Name	Description
+allocationId *
+integer($int64)
+(path)
+allocationId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "allocationId": 0,
+  "candidateId": 0,
+  "windowId": 0,
+  "centreId": 0,
+  "roomNumber": "string",
+  "seatNumber": "string",
+  "hallTicketNumber": "string",
+  "status": "Allocated"
+}
+No links
+
+GET
+/api/seat-allocations
+List seat allocations with optional windowId/candidateId filters (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+windowId
+integer($int64)
+(query)
+windowId
+candidateId
+integer($int64)
+(query)
+candidateId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "allocationId": 0,
+      "candidateId": 0,
+      "windowId": 0,
+      "centreId": 0,
+      "roomNumber": "string",
+      "seatNumber": "string",
+      "hallTicketNumber": "string",
+      "status": "Allocated"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+GET
+/api/seat-allocations/by-window/{windowId}
+List allocations for an exam window
+
+
+Parameters
+Try it out
+Name	Description
+windowId *
+integer($int64)
+(path)
+windowId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "allocationId": 0,
+      "candidateId": 0,
+      "windowId": 0,
+      "centreId": 0,
+      "roomNumber": "string",
+      "seatNumber": "string",
+      "hallTicketNumber": "string",
+      "status": "Allocated"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+GET
+/api/seat-allocations/by-candidate/{candidateId}
+Get allocations for a candidate
+
+
+Parameters
+Try it out
+Name	Description
+candidateId *
+integer($int64)
+(path)
+candidateId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "allocationId": 0,
+      "candidateId": 0,
+      "windowId": 0,
+      "centreId": 0,
+      "roomNumber": "string",
+      "seatNumber": "string",
+      "hallTicketNumber": "string",
+      "status": "Allocated"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+PATCH
+/api/seat-allocations/{allocationId}/status
+Change seat allocation status
+
+
+Parameters
+Try it out
+Name	Description
+allocationId *
+integer($int64)
+(path)
+allocationId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "status": "Allocated"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "allocationId": 0,
+  "candidateId": 0,
+  "windowId": 0,
+  "centreId": 0,
+  "roomNumber": "string",
+  "seatNumber": "string",
+  "hallTicketNumber": "string",
+  "status": "Allocated"
+}
+No links
+
+POST
+/api/seat-allocations
+Create a new seat allocation (auto-generates hall ticket number)
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "candidateId": 0,
+  "windowId": 0,
+  "centreId": 0,
+  "roomNumber": "string",
+  "seatNumber": "string",
+  "status": "Allocated"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "allocationId": 0,
+  "candidateId": 0,
+  "windowId": 0,
+  "centreId": 0,
+  "roomNumber": "string",
+  "seatNumber": "string",
+  "hallTicketNumber": "string",
+  "status": "Allocated"
+}
+No links
+
+PUT
+/api/seat-allocations/{allocationId}
+Reassign room/seat for an allocation
+
+
+Parameters
+Try it out
+Name	Description
+allocationId *
+integer($int64)
+(path)
+allocationId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "candidateId": 0,
+  "windowId": 0,
+  "centreId": 0,
+  "roomNumber": "string",
+  "seatNumber": "string",
+  "status": "Allocated"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "allocationId": 0,
+  "candidateId": 0,
+  "windowId": 0,
+  "centreId": 0,
+  "roomNumber": "string",
+  "seatNumber": "string",
+  "hallTicketNumber": "string",
+  "status": "Allocated"
+}
+No links
+Candidate API (P1-12)
+CRUD and status management for candidates
+
+
+
+GET
+/api/candidates/{id}
+Get candidate details by ID
+
+
+Parameters
+Try it out
+Name	Description
+id *
+integer($int64)
+(path)
+id
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "candidateId": 0,
+  "userId": 0,
+  "name": "string",
+  "dateOfBirth": "2026-06-25",
+  "gender": "string",
+  "email": "string",
+  "phone": "string",
+  "address": "string",
+  "highestQualification": "string",
+  "professionalExperience": "string",
+  "employerName": "string",
+  "status": "Active"
+}
+No links
+
+GET
+/api/candidates
+List candidates with optional name/status/qualification filters (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+name
+string
+(query)
+name
+status
+string
+(query)
+status
+qualification
+string
+(query)
+qualification
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "candidateId": 0,
+      "userId": 0,
+      "name": "string",
+      "dateOfBirth": "2026-06-25",
+      "gender": "string",
+      "email": "string",
+      "phone": "string",
+      "address": "string",
+      "highestQualification": "string",
+      "professionalExperience": "string",
+      "employerName": "string",
+      "status": "Active"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+PATCH
+/api/candidates/{id}/status
+Change candidate status (e.g., suspend or debar)
+
+
+Parameters
+Try it out
+Name	Description
+id *
+integer($int64)
+(path)
+id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "candidateId": 0,
+  "userId": 0,
+  "name": "string",
+  "dateOfBirth": "2026-06-25",
+  "gender": "string",
+  "email": "string",
+  "phone": "string",
+  "address": "string",
+  "highestQualification": "string",
+  "professionalExperience": "string",
+  "employerName": "string",
+  "status": "Active"
+}
+No links
+
+POST
+/api/candidates
+Create a new candidate
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "userId": 0,
+  "name": "string",
+  "dateOfBirth": "2026-06-25",
+  "gender": "string",
+  "email": "string",
+  "phone": "string",
+  "address": "string",
+  "highestQualification": "string",
+  "professionalExperience": "string",
+  "employerName": "string",
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "candidateId": 0,
+  "userId": 0,
+  "name": "string",
+  "dateOfBirth": "2026-06-25",
+  "gender": "string",
+  "email": "string",
+  "phone": "string",
+  "address": "string",
+  "highestQualification": "string",
+  "professionalExperience": "string",
+  "employerName": "string",
+  "status": "Active"
+}
+No links
+
+PUT
+/api/candidates/{id}
+Update candidate details
+
+
+Parameters
+Try it out
+Name	Description
+id *
+integer($int64)
+(path)
+id
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "userId": 0,
+  "name": "string",
+  "dateOfBirth": "2026-06-25",
+  "gender": "string",
+  "email": "string",
+  "phone": "string",
+  "address": "string",
+  "highestQualification": "string",
+  "professionalExperience": "string",
+  "employerName": "string",
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "candidateId": 0,
+  "userId": 0,
+  "name": "string",
+  "dateOfBirth": "2026-06-25",
+  "gender": "string",
+  "email": "string",
+  "phone": "string",
+  "address": "string",
+  "highestQualification": "string",
+  "professionalExperience": "string",
+  "employerName": "string",
+  "status": "Active"
+}
+No links
+Notification API (P1-23)
+User notification delivery and read-state management
+
+
+
+GET
+/api/notifications
+List notifications with optional userId/category/status filters (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+userId
+integer($int64)
+(query)
+userId
+category
+string
+(query)
+category
+status
+string
+(query)
+status
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "notificationId": 0,
+      "userId": 0,
+      "message": "string",
+      "category": "Registration",
+      "status": "Unread",
+      "createdDate": "2026-06-25T16:51:02.826Z"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+GET
+/api/notifications/{notificationId}
+Get notification details by ID
+
+
+Parameters
+Try it out
+Name	Description
+notificationId *
+integer($int64)
+(path)
+notificationId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "notificationId": 0,
+  "userId": 0,
+  "message": "string",
+  "category": "Registration",
+  "status": "Unread",
+  "createdDate": "2026-06-25T16:51:02.842Z"
+}
+No links
+
+GET
+/api/notifications/unread-count
+Get the count of a user's unread notifications
+
+
+Parameters
+Try it out
+Name	Description
+userId *
+integer($int64)
+(query)
+userId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "additionalProp1": {},
+  "additionalProp2": {},
+  "additionalProp3": {}
+}
+No links
+
+GET
+/api/notifications/by-user/{userId}
+Get notifications for a user
+
+
+Parameters
+Try it out
+Name	Description
+userId *
+integer($int64)
+(path)
+userId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "notificationId": 0,
+      "userId": 0,
+      "message": "string",
+      "category": "Registration",
+      "status": "Unread",
+      "createdDate": "2026-06-25T16:51:02.874Z"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+PATCH
+/api/notifications/{notificationId}/status
+Update notification status (mark Read/Dismissed)
+
+
+Parameters
+Try it out
+Name	Description
+notificationId *
+integer($int64)
+(path)
+notificationId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "status": "Unread"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "notificationId": 0,
+  "userId": 0,
+  "message": "string",
+  "category": "Registration",
+  "status": "Unread",
+  "createdDate": "2026-06-25T16:51:02.903Z"
+}
+No links
+
+PATCH
+/api/notifications/mark-all-read
+Mark all of a user's unread notifications as read
+
+
+Parameters
+Try it out
+Name	Description
+userId *
+integer($int64)
+(query)
+userId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "additionalProp1": {},
+  "additionalProp2": {},
+  "additionalProp3": {}
+}
+No links
+
+POST
+/api/notifications
+Create a new notification
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "userId": 0,
+  "message": "string",
+  "category": "Registration"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "notificationId": 0,
+  "userId": 0,
+  "message": "string",
+  "category": "Registration",
+  "status": "Unread",
+  "createdDate": "2026-06-25T16:51:02.933Z"
+}
+No links
+RBAC & Role Management API (P2-05)
+
+
+DELETE
+/api/roles/{roleId}/permissions/{permissionId}
+Remove a permission from a role
+
+
+Parameters
+Try it out
+Name	Description
+roleId *
+string
+(path)
+roleId
+permissionId *
+integer($int64)
+(path)
+permissionId
+Responses
+Code	Description	Links
+200	
+OK
+
+No links
+
+GET
+/api/roles/{roleId}/permissions
+Get permissions for a role
+
+
+Parameters
+Try it out
+Name	Description
+roleId *
+string
+(path)
+roleId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "permissionId": 0,
+    "code": "string",
+    "description": "string"
+  }
+]
+No links
+
+GET
+/api/users/{userId}/permissions
+Get effective permissions for a user
+
+
+Parameters
+Try it out
+Name	Description
+userId *
+integer($int64)
+(path)
+userId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "userId": 0,
+  "role": "Candidate",
+  "permissions": [
+    {
+      "permissionId": 0,
+      "code": "string",
+      "description": "string"
+    }
+  ]
+}
+No links
+
+GET
+/api/roles
+List all roles with their permissions
+
+
+Parameters
+Try it out
+No parameters
+
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "role": "string",
+    "permissions": [
+      {
+        "permissionId": 0,
+        "code": "string",
+        "description": "string"
+      }
+    ]
+  }
+]
+No links
+
+POST
+/api/roles/{roleId}/permissions
+Add a permission to a role
+
+
+Parameters
+Try it out
+Name	Description
+roleId *
+string
+(path)
+roleId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "code": "string",
+  "description": "string"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "permissionId": 0,
+  "code": "string",
+  "description": "string"
+}
+No links
+
+PUT
+/api/users/{userId}/role
+Assign or change a user's role
+
+
+Parameters
+Try it out
+Name	Description
+userId *
+integer($int64)
+(path)
+userId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "role": "Candidate"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "userId": 0,
+  "name": "string",
+  "role": "Candidate",
+  "email": "string",
+  "phone": "string",
+  "status": "Active"
+}
+No links
+Re-evaluation Workflow API (P2-04)
+
+
+GET
+/api/re-evaluations
+List re-evaluation requests, optionally filtered by candidateId (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+candidateId
+integer($int64)
+(query)
+candidateId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "reEvalId": 0,
+      "candidateId": 0,
+      "resultId": 0,
+      "windowId": 0,
+      "reason": "string",
+      "status": "Requested",
+      "assignedEvaluatorId": 0,
+      "revisedMarks": 0,
+      "outcome": "Pass",
+      "remarks": "string",
+      "requestDate": "2026-06-25",
+      "completedDate": "2026-06-25"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+GET
+/api/re-evaluations/{reEvalId}
+Get re-evaluation request details by ID
+
+
+Parameters
+Try it out
+Name	Description
+reEvalId *
+integer($int64)
+(path)
+reEvalId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "reEvalId": 0,
+  "candidateId": 0,
+  "resultId": 0,
+  "windowId": 0,
+  "reason": "string",
+  "status": "Requested",
+  "assignedEvaluatorId": 0,
+  "revisedMarks": 0,
+  "outcome": "Pass",
+  "remarks": "string",
+  "requestDate": "2026-06-25",
+  "completedDate": "2026-06-25"
+}
+No links
+
+GET
+/api/re-evaluations/pending
+List pending re-evaluation requests for an exam window
+
+
+Parameters
+Try it out
+Name	Description
+windowId *
+integer($int64)
+(query)
+windowId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "reEvalId": 0,
+    "candidateId": 0,
+    "resultId": 0,
+    "windowId": 0,
+    "reason": "string",
+    "status": "Requested",
+    "assignedEvaluatorId": 0,
+    "revisedMarks": 0,
+    "outcome": "Pass",
+    "remarks": "string",
+    "requestDate": "2026-06-25",
+    "completedDate": "2026-06-25"
+  }
+]
+No links
+
+POST
+/api/re-evaluations
+Submit a re-evaluation request
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "candidateId": 0,
+  "resultId": 0,
+  "windowId": 0,
+  "reason": "string"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "reEvalId": 0,
+  "candidateId": 0,
+  "resultId": 0,
+  "windowId": 0,
+  "reason": "string",
+  "status": "Requested",
+  "assignedEvaluatorId": 0,
+  "revisedMarks": 0,
+  "outcome": "Pass",
+  "remarks": "string",
+  "requestDate": "2026-06-25",
+  "completedDate": "2026-06-25"
+}
+No links
+
+PUT
+/api/re-evaluations/{reEvalId}/complete
+Submit revised marks and outcome
+
+
+Parameters
+Try it out
+Name	Description
+reEvalId *
+integer($int64)
+(path)
+reEvalId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "revisedMarks": 0,
+  "outcome": "Pass",
+  "remarks": "string"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "reEvalId": 0,
+  "candidateId": 0,
+  "resultId": 0,
+  "windowId": 0,
+  "reason": "string",
+  "status": "Requested",
+  "assignedEvaluatorId": 0,
+  "revisedMarks": 0,
+  "outcome": "Pass",
+  "remarks": "string",
+  "requestDate": "2026-06-25",
+  "completedDate": "2026-06-25"
+}
+No links
+
+PUT
+/api/re-evaluations/{reEvalId}/assign
+Assign the re-evaluation to a new evaluator
+
+
+Parameters
+Try it out
+Name	Description
+reEvalId *
+integer($int64)
+(path)
+reEvalId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "evaluatorId": 0
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "reEvalId": 0,
+  "candidateId": 0,
+  "resultId": 0,
+  "windowId": 0,
+  "reason": "string",
+  "status": "Requested",
+  "assignedEvaluatorId": 0,
+  "revisedMarks": 0,
+  "outcome": "Pass",
+  "remarks": "string",
+  "requestDate": "2026-06-25",
+  "completedDate": "2026-06-25"
+}
+No links
+Marks Moderation & Dual Marking API (P2-03)
+
+
+GET
+/api/moderation/dashboard
+Moderation status dashboard (pending/escalated/resolved counts)
+
+
+Parameters
+Try it out
+Name	Description
+windowId *
+integer($int64)
+(query)
+windowId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "additionalProp1": {},
+  "additionalProp2": {},
+  "additionalProp3": {}
+}
+No links
+
+GET
+/api/dual-marking/discrepancies
+List scripts whose marks discrepancy exceeds the threshold
+
+
+Parameters
+Try it out
+Name	Description
+windowId *
+integer($int64)
+(query)
+windowId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+[
+  {
+    "caseId": 0,
+    "scriptId": 0,
+    "windowId": 0,
+    "firstEvaluatorId": 0,
+    "secondEvaluatorId": 0,
+    "firstMarks": 0,
+    "secondMarks": 0,
+    "discrepancy": 0,
+    "threshold": 0,
+    "finalMarks": 0,
+    "moderatorId": 0,
+    "status": "Pending",
+    "createdDate": "2026-06-25"
+  }
+]
+No links
+
+POST
+/api/moderation/escalate
+Escalate a discrepant script to a moderator
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "scriptId": 0,
+  "moderatorId": 0
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "caseId": 0,
+  "scriptId": 0,
+  "windowId": 0,
+  "firstEvaluatorId": 0,
+  "secondEvaluatorId": 0,
+  "firstMarks": 0,
+  "secondMarks": 0,
+  "discrepancy": 0,
+  "threshold": 0,
+  "finalMarks": 0,
+  "moderatorId": 0,
+  "status": "Pending",
+  "createdDate": "2026-06-25"
+}
+No links
+
+POST
+/api/dual-marking/allocate
+Allocate a script to a second evaluator
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "scriptId": 0,
+  "windowId": 0,
+  "secondEvaluatorId": 0,
+  "firstEvaluatorId": 0,
+  "firstMarks": 0,
+  "secondMarks": 0,
+  "threshold": 0
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "caseId": 0,
+  "scriptId": 0,
+  "windowId": 0,
+  "firstEvaluatorId": 0,
+  "secondEvaluatorId": 0,
+  "firstMarks": 0,
+  "secondMarks": 0,
+  "discrepancy": 0,
+  "threshold": 0,
+  "finalMarks": 0,
+  "moderatorId": 0,
+  "status": "Pending",
+  "createdDate": "2026-06-25"
+}
+No links
+
+PUT
+/api/moderation/{scriptId}/resolve
+Submit moderated final marks
+
+
+Parameters
+Try it out
+Name	Description
+scriptId *
+integer($int64)
+(path)
+scriptId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "finalMarks": 0,
+  "moderatorId": 0
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "caseId": 0,
+  "scriptId": 0,
+  "windowId": 0,
+  "firstEvaluatorId": 0,
+  "secondEvaluatorId": 0,
+  "firstMarks": 0,
+  "secondMarks": 0,
+  "discrepancy": 0,
+  "threshold": 0,
+  "finalMarks": 0,
+  "moderatorId": 0,
+  "status": "Pending",
+  "createdDate": "2026-06-25"
+}
+No links
+Invigilator Management API (P2-02)
+
+
+DELETE
+/api/invigilator-assignments/{assignmentId}
+Remove an invigilator assignment
+
+
+Parameters
+Try it out
+Name	Description
+assignmentId *
+integer($int64)
+(path)
+assignmentId
+Responses
+Code	Description	Links
+200	
+OK
+
+No links
+
+GET
+/api/invigilators
+List invigilators with an optional centreId filter (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+centreId
+integer($int64)
+(query)
+centreId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "invigilatorId": 0,
+      "userId": 0,
+      "centreId": 0,
+      "status": "Active"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+GET
+/api/invigilator-assignments
+List assignments with optional windowId/centreId filters (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+windowId
+integer($int64)
+(query)
+windowId
+centreId
+integer($int64)
+(query)
+centreId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "assignmentId": 0,
+      "invigilatorId": 0,
+      "windowId": 0,
+      "centreId": 0,
+      "roomNumber": "string"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+POST
+/api/invigilators
+Register a user as an invigilator for a test centre
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "userId": 0,
+  "centreId": 0,
+  "status": "Active"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "invigilatorId": 0,
+  "userId": 0,
+  "centreId": 0,
+  "status": "Active"
+}
+No links
+
+POST
+/api/invigilator-assignments
+Assign an invigilator to a room for an exam window
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "invigilatorId": 0,
+  "windowId": 0,
+  "centreId": 0,
+  "roomNumber": "string"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "assignmentId": 0,
+  "invigilatorId": 0,
+  "windowId": 0,
+  "centreId": 0,
+  "roomNumber": "string"
+}
+No links
+
+PUT
+/api/invigilator-assignments/{assignmentId}
+Update an assignment (change room or swap invigilator)
+
+
+Parameters
+Try it out
+Name	Description
+assignmentId *
+integer($int64)
+(path)
+assignmentId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "invigilatorId": 0,
+  "windowId": 0,
+  "centreId": 0,
+  "roomNumber": "string"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "assignmentId": 0,
+  "invigilatorId": 0,
+  "windowId": 0,
+  "centreId": 0,
+  "roomNumber": "string"
+}
+No links
+Evaluation API (P1-18)
+
+
+GET
+/api/script-allocations
+List script allocations with optional evaluatorId filter (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+evaluatorId
+integer($int64)
+(query)
+evaluatorId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "scriptId": 0,
+      "allocationId": 0,
+      "evaluatorId": 0,
+      "paperId": 0,
+      "allocationDate": "2026-06-25",
+      "status": "Assigned"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+GET
+/api/marks-entries
+List marks entries with optional scriptId filter (paginated)
+
+
+
+GET
+/api/script-allocations/{scriptId}
+Get script allocation details by ID
+
+
+Parameters
+Try it out
+Name	Description
+scriptId *
+integer($int64)
+(path)
+scriptId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "scriptId": 0,
+  "allocationId": 0,
+  "evaluatorId": 0,
+  "paperId": 0,
+  "allocationDate": "2026-06-25",
+  "status": "Assigned"
+}
+No links
+
+GET
+/api/script-allocations/by-evaluator/{evaluatorId}
+Get scripts assigned to an evaluator
+
+
+Parameters
+Try it out
+Name	Description
+evaluatorId *
+integer($int64)
+(path)
+evaluatorId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "scriptId": 0,
+      "allocationId": 0,
+      "evaluatorId": 0,
+      "paperId": 0,
+      "allocationDate": "2026-06-25",
+      "status": "Assigned"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+GET
+/api/marks-entries/by-script/{scriptId}
+Get all marks entries for a script
+
+
+Parameters
+Try it out
+Name	Description
+scriptId *
+integer($int64)
+(path)
+scriptId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "marksId": 0,
+      "scriptId": 0,
+      "evaluatorId": 0,
+      "marksAwarded": 0,
+      "entryDate": "2026-06-25",
+      "verifiedById": 0,
+      "status": "Draft"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+PATCH
+/api/script-allocations/{scriptId}/status
+Change script allocation status
+
+
+Parameters
+Try it out
+Name	Description
+scriptId *
+integer($int64)
+(path)
+scriptId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "status": "Assigned"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "scriptId": 0,
+  "allocationId": 0,
+  "evaluatorId": 0,
+  "paperId": 0,
+  "allocationDate": "2026-06-25",
+  "status": "Assigned"
+}
+No links
+
+PATCH
+/api/marks-entries/{marksId}/status
+Change marks entry status
+
+
+Parameters
+Try it out
+Name	Description
+marksId *
+integer($int64)
+(path)
+marksId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "status": "Draft"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "marksId": 0,
+  "scriptId": 0,
+  "evaluatorId": 0,
+  "marksAwarded": 0,
+  "entryDate": "2026-06-25",
+  "verifiedById": 0,
+  "status": "Draft"
+}
+No links
+
+POST
+/api/script-allocations
+Allocate a script to an evaluator
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "allocationId": 0,
+  "evaluatorId": 0,
+  "paperId": 0,
+  "status": "Assigned"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "scriptId": 0,
+  "allocationId": 0,
+  "evaluatorId": 0,
+  "paperId": 0,
+  "allocationDate": "2026-06-25",
+  "status": "Assigned"
+}
+No links
+
+POST
+/api/marks-entries
+Create a marks entry
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "scriptId": 0,
+  "evaluatorId": 0,
+  "marksAwarded": 0,
+  "verifiedById": 0,
+  "status": "Draft"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "marksId": 0,
+  "scriptId": 0,
+  "evaluatorId": 0,
+  "marksAwarded": 0,
+  "entryDate": "2026-06-25",
+  "verifiedById": 0,
+  "status": "Draft"
+}
+No links
+
+POST
+/api/marks-entries/{marksId}/verify
+Verify a marks entry
+
+
+Parameters
+Try it out
+Name	Description
+marksId *
+integer($int64)
+(path)
+marksId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "verifiedById": 0
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "marksId": 0,
+  "scriptId": 0,
+  "evaluatorId": 0,
+  "marksAwarded": 0,
+  "entryDate": "2026-06-25",
+  "verifiedById": 0,
+  "status": "Draft"
+}
+No links
+Result API (P1-19)
+
+
+GET
+/api/results
+List candidate results with optional candidateId/windowId filters (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+candidateId
+integer($int64)
+(query)
+candidateId
+windowId
+integer($int64)
+(query)
+windowId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "resultId": 0,
+      "candidateId": 0,
+      "windowId": 0,
+      "programId": 0,
+      "totalMarks": 0,
+      "marksObtained": 0,
+      "percentage": 0,
+      "grade": "string",
+      "outcome": "Pass",
+      "publishedDate": "2026-06-25",
+      "status": "Draft"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+GET
+/api/results/{resultId}
+Get candidate result details by ID
+
+
+Parameters
+Try it out
+Name	Description
+resultId *
+integer($int64)
+(path)
+resultId
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "resultId": 0,
+  "candidateId": 0,
+  "windowId": 0,
+  "programId": 0,
+  "totalMarks": 0,
+  "marksObtained": 0,
+  "percentage": 0,
+  "grade": "string",
+  "outcome": "Pass",
+  "publishedDate": "2026-06-25",
+  "status": "Draft"
+}
+No links
+
+GET
+/api/results/by-window/{windowId}
+Get all results for an exam window
+
+
+Parameters
+Try it out
+Name	Description
+windowId *
+integer($int64)
+(path)
+windowId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "resultId": 0,
+      "candidateId": 0,
+      "windowId": 0,
+      "programId": 0,
+      "totalMarks": 0,
+      "marksObtained": 0,
+      "percentage": 0,
+      "grade": "string",
+      "outcome": "Pass",
+      "publishedDate": "2026-06-25",
+      "status": "Draft"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+GET
+/api/results/by-candidate/{candidateId}
+Get all results for a candidate
+
+
+Parameters
+Try it out
+Name	Description
+candidateId *
+integer($int64)
+(path)
+candidateId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "resultId": 0,
+      "candidateId": 0,
+      "windowId": 0,
+      "programId": 0,
+      "totalMarks": 0,
+      "marksObtained": 0,
+      "percentage": 0,
+      "grade": "string",
+      "outcome": "Pass",
+      "publishedDate": "2026-06-25",
+      "status": "Draft"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+PATCH
+/api/results/{resultId}/status
+Change candidate result status
+
+
+Parameters
+Try it out
+Name	Description
+resultId *
+integer($int64)
+(path)
+resultId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "status": "Draft"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "resultId": 0,
+  "candidateId": 0,
+  "windowId": 0,
+  "programId": 0,
+  "totalMarks": 0,
+  "marksObtained": 0,
+  "percentage": 0,
+  "grade": "string",
+  "outcome": "Pass",
+  "publishedDate": "2026-06-25",
+  "status": "Draft"
+}
+No links
+
+POST
+/api/results
+Create a single candidate result
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "candidateId": 0,
+  "windowId": 0,
+  "programId": 0,
+  "totalMarks": 0,
+  "marksObtained": 0,
+  "grade": "string",
+  "outcome": "Pass",
+  "status": "Draft"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "resultId": 0,
+  "candidateId": 0,
+  "windowId": 0,
+  "programId": 0,
+  "totalMarks": 0,
+  "marksObtained": 0,
+  "percentage": 0,
+  "grade": "string",
+  "outcome": "Pass",
+  "publishedDate": "2026-06-25",
+  "status": "Draft"
+}
+No links
+
+POST
+/api/results/{resultId}/re-evaluation
+Request re-evaluation of a result
+
+
+Parameters
+Try it out
+Name	Description
+resultId *
+integer($int64)
+(path)
+resultId
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "reason": "string"
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "reEvalId": 0,
+  "candidateId": 0,
+  "resultId": 0,
+  "windowId": 0,
+  "reason": "string",
+  "status": "Requested",
+  "assignedEvaluatorId": 0,
+  "revisedMarks": 0,
+  "outcome": "Pass",
+  "remarks": "string",
+  "requestDate": "2026-06-25",
+  "completedDate": "2026-06-25"
+}
+No links
+
+POST
+/api/results/publish
+Publish all results for an evaluation window
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "windowId": 0
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "additionalProp1": {},
+  "additionalProp2": {},
+  "additionalProp3": {}
+}
+No links
+
+POST
+/api/results/compute
+Trigger result computation for an evaluation window
+
+
+Parameters
+Try it out
+No parameters
+
+Request body
+
+application/json
+Example Value
+Schema
+{
+  "windowId": 0
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "additionalProp1": {},
+  "additionalProp2": {},
+  "additionalProp3": {}
+}
+No links
+Hall Ticket Generation API (P2-01)
+
+
+GET
+/api/hall-tickets
+Look up hall tickets with optional candidateId/windowId filters (paginated)
+
+
+Parameters
+Try it out
+Name	Description
+candidateId
+integer($int64)
+(query)
+candidateId
+windowId
+integer($int64)
+(query)
+windowId
+pageable *
+object
+(query)
+{
+  "page": 0,
+  "size": 1,
+  "sort": [
+    "string"
+  ]
+}
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "totalElements": 0,
+  "totalPages": 0,
+  "size": 0,
+  "content": [
+    {
+      "hallTicketId": 0,
+      "hallTicketNumber": "string",
+      "candidateId": 0,
+      "windowId": 0,
+      "centreId": 0,
+      "allocationId": 0,
+      "roomNumber": "string",
+      "seatNumber": "string",
+      "examDate": "2026-06-25",
+      "generatedDate": "2026-06-25T16:51:03.620Z",
+      "status": "Generated"
+    }
+  ],
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "first": true,
+  "last": true,
+  "numberOfElements": 0,
+  "pageable": {
+    "offset": 0,
+    "sort": {
+      "empty": true,
+      "sorted": true,
+      "unsorted": true
+    },
+    "paged": true,
+    "unpaged": true,
+    "pageNumber": 0,
+    "pageSize": 0
+  },
+  "empty": true
+}
+No links
+
+GET
+/api/hall-tickets/{hallTicketNumber}
+Retrieve hall ticket details by hall ticket number
+
+
+Parameters
+Try it out
+Name	Description
+hallTicketNumber *
+string
+(path)
+hallTicketNumber
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+{
+  "hallTicketId": 0,
+  "hallTicketNumber": "string",
+  "candidateId": 0,
+  "windowId": 0,
+  "centreId": 0,
+  "allocationId": 0,
+  "roomNumber": "string",
+  "seatNumber": "string",
+  "examDate": "2026-06-25",
+  "generatedDate": "2026-06-25T16:51:03.635Z",
+  "status": "Generated"
+}
+No links
+
+GET
+/api/hall-tickets/{hallTicketNumber}/download
+Download the hall ticket as a PDF
+
+
+Parameters
+Try it out
+Name	Description
+hallTicketNumber *
+string
+(path)
+hallTicketNumber
+Responses
+Code	Description	Links
+200	
+OK
+
+Media type
+
+*/*
+Controls Accept header.
+Example Value
+Schema
+string
+No links
+
+POST
+/api/hall-tickets/generate
+Generate a hall ticket for a confirmed seat allocation
