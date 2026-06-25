@@ -1,0 +1,33 @@
+Issue Type,Summary,Description,Epic Link,Story Points,Assignee,Priority,Phase
+Epic,Identity & Access Management,Authentication RBAC audit,,,,,
+Epic,Candidate Management,Candidate registration and eligibility,,,,,
+Epic,Exam Scheduling,Exam scheduling and test centres,,,,,
+Epic,Question Management,Question bank and paper creation,,,,,
+Epic,Result Processing,Evaluation and results,,,,,
+Epic,Certification,Certificate issuance and renewal,,,,,
+Epic,Analytics,Exam analytics dashboards,,,,,
+Epic,Notifications,Alerts and updates,,,,,
+Story,User Registration API,Register users,Identity & Access Management,5,Dev1,High,Backend
+Story,Login API,Authenticate users,Identity & Access Management,8,Dev1,High,Backend
+Story,Audit Log API,Track activities,Identity & Access Management,5,Dev1,Medium,Backend
+Story,Candidate API,Manage candidates,Candidate Management,5,Dev2,High,Backend
+Story,Eligibility API,Validate eligibility,Candidate Management,5,Dev2,High,Backend
+Story,Exam Window API,Manage exam schedules,Exam Scheduling,8,Dev3,High,Backend
+Story,Seat Allocation API,Allocate seats,Exam Scheduling,5,Dev3,Medium,Backend
+Story,Question API,Manage questions,Question Management,8,Dev4,High,Backend
+Story,Question Paper API,Create papers,Question Management,8,Dev4,High,Backend
+Story,Evaluation API,Evaluate answer scripts,Result Processing,8,Dev5,High,Backend
+Story,Result API,Publish results,Result Processing,5,Dev5,High,Backend
+Story,Certificate API,Issue certificates,Certification,5,Dev1,High,Backend
+Story,Renewal API,Manage renewals,Certification,5,Dev1,Medium,Backend
+Story,Analytics API,Generate reports,Analytics,5,Dev2,High,Backend
+Story,Notification API,Send alerts,Notifications,5,Dev3,Medium,Backend
+Story,Login UI,Login screen,Identity & Access Management,5,Dev1,High,Frontend
+Story,Dashboard UI,Dashboard,Identity & Access Management,5,Dev1,Medium,Frontend
+Story,Candidate UI,Candidate portal UI,Candidate Management,5,Dev2,High,Frontend
+Story,Exam Scheduling UI,Schedule UI,Exam Scheduling,5,Dev3,High,Frontend
+Story,Question UI,Question management UI,Question Management,5,Dev4,High,Frontend
+Story,Result UI,Result screen,Result Processing,5,Dev5,High,Frontend
+Story,Certificate UI,Certificate UI,Certification,5,Dev1,High,Frontend
+Story,Analytics UI,Analytics dashboard,Analytics,5,Dev2,High,Frontend
+Story,Notification UI,Alerts UI,Notifications,5,Dev3,Low,Frontend
