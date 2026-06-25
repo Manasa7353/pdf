@@ -1,0 +1,986 @@
+/v3/api-docs
+Explore
+CertifyPro API
+ v0.0.1 
+OAS 3.0
+/v3/api-docs
+Examination and Certification Management System - REST API documentation
+
+Contact CertifyPro Team
+Apache 2.0
+Servers
+
+http://localhost:8081 - Generated server url
+
+Authorize
+Question API (P1-16)
+CRUD, status management and filtering for question bank items
+
+
+
+DELETE
+/api/questions/{questionId}
+Soft-delete a question (sets status to Retired)
+
+
+
+GET
+/api/questions/{questionId}
+Get question details by ID
+
+
+
+GET
+/api/questions
+List questions with optional filters (paginated)
+
+
+
+PATCH
+/api/questions/{questionId}/status
+Change question status
+
+
+
+POST
+/api/questions
+Create a new question
+
+
+
+PUT
+/api/questions/{questionId}
+Update question details
+
+
+Audit Log API (P1-11)
+Immutable audit trail of system actions
+
+
+
+GET
+/api/audit-logs
+List audit logs with optional userId/module/action filters (paginated)
+
+
+
+GET
+/api/audit-logs/{auditId}
+Get audit log entry by ID
+
+
+
+POST
+/api/audit-logs
+Record a new audit log entry
+
+
+Programme Enrolment API (P1-35)
+Candidate enrolment into certification programmes
+
+
+
+GET
+/api/enrolments/{enrolmentId}
+Get enrolment details by ID
+
+
+
+GET
+/api/enrolments
+List enrolments, optionally filtered by candidateId (paginated)
+
+
+
+PATCH
+/api/enrolments/{enrolmentId}/withdraw
+Withdraw an enrolment
+
+
+
+POST
+/api/enrolments
+Enrol a candidate into a certification programme
+
+
+
+PUT
+/api/enrolments/{enrolmentId}
+Update enrolment details
+
+
+
+PUT
+/api/enrolments/{enrolmentId}/eligibility
+Update the eligibility status of an enrolment
+
+
+Certificate API (P1-20)
+Issuance, verification and status management of certificates
+
+
+
+GET
+/api/certificates
+List certificates with optional candidateId/status filters (paginated)
+
+
+
+GET
+/api/certificates/{certificateId}
+Get certificate details by ID
+
+
+
+GET
+/api/certificates/verify/{certificateNumber}
+Publicly verify a certificate by its certificate number
+
+
+
+PATCH
+/api/certificates/{certificateId}/status
+Change certificate status (e.g., revoke or suspend)
+
+
+
+POST
+/api/certificates
+Issue a new certificate
+
+
+Eligibility API (P1-13)
+Eligibility checking for candidate programme enrolment
+
+
+
+GET
+/api/enrolments/{enrolmentId}
+Get enrolment details by ID
+
+
+
+GET
+/api/enrolments
+List enrolments, optionally filtered by candidateId (paginated)
+
+
+
+POST
+/api/enrolments
+Enrol a candidate into a certification programme
+
+
+
+POST
+/api/eligibility/check
+Check whether a candidate is eligible for a certification programme
+
+
+
+PUT
+/api/enrolments/{enrolmentId}
+Update enrolment details
+
+
+Renewal API (P1-21)
+Submission and review of certificate renewal applications
+
+
+
+GET
+/api/renewals
+List renewal applications with optional candidateId/certificateId/status filters (paginated)
+
+
+
+GET
+/api/renewals/{renewalId}
+Get renewal application details by ID
+
+
+
+GET
+/api/renewals/by-status/{status}
+List renewals by status
+
+
+
+GET
+/api/renewals/by-certificate/{certificateId}
+Get renewal history for a certificate
+
+
+
+GET
+/api/renewals/by-candidate/{candidateId}
+Get all renewals for a candidate
+
+
+
+PATCH
+/api/renewals/{renewalId}/review
+Review a renewal application (approve or reject)
+
+
+
+POST
+/api/renewals
+Submit a new renewal application
+
+
+Analytics API (P1-22)
+Aggregated analytics metrics (scaffold stubs)
+
+
+
+GET
+/api/analytics/pass-rates
+Get pass rates for a program within an exam window (stub)
+
+
+
+GET
+/api/analytics/grade-distribution
+Get grade distribution for an exam window (stub)
+
+
+
+GET
+/api/analytics/certification-stats
+Get overall certification statistics (stub)
+
+
+
+GET
+/api/analytics/centre-performance
+Get performance metrics for a test centre (stub)
+
+
+
+GET
+/api/analytics/attempt-utilisation
+Get attempt utilisation for a program (stub)
+
+
+Question Paper API (P1-17)
+Question paper management, status workflow and question composition
+
+
+
+DELETE
+/api/question-papers/{paperId}/questions/{questionId}
+Remove a question from the paper and recompute total marks
+
+
+
+GET
+/api/question-papers/{paperId}
+Get question paper details (including its questions) by ID
+
+
+
+GET
+/api/question-papers
+List question papers, optionally filtered by windowId (paginated)
+
+
+
+PATCH
+/api/question-papers/{paperId}/status
+Change question paper status
+
+
+
+POST
+/api/question-papers
+Create a new question paper
+
+
+
+POST
+/api/question-papers/{paperId}/questions
+Add a question to the paper and recompute total marks (blocked when finalised)
+
+
+
+PUT
+/api/question-papers/{paperId}
+Update question paper metadata (blocked when finalised)
+
+
+Certification Programme API (P1-34)
+CRUD and status management for certification programmes
+
+
+
+GET
+/api/programmes/{programId}
+Get certification programme details by ID
+
+
+
+GET
+/api/programmes
+List certification programmes with optional level/status/body filters (paginated)
+
+
+
+PATCH
+/api/programmes/{programId}/status
+Change certification programme status
+
+
+
+POST
+/api/programmes
+Create a new certification programme
+
+
+
+PUT
+/api/programmes/{programId}
+Update certification programme details
+
+
+User Registration API (P1-9)
+Registration and management of users
+
+
+
+GET
+/api/users/{userId}
+Get user details by ID
+
+
+
+GET
+/api/users
+List users with optional role/status/name filters (paginated)
+
+
+
+PATCH
+/api/users/{userId}/status
+Change user status (e.g., suspend or deactivate)
+
+
+
+POST
+/api/users
+Create a user of any role (Admin only)
+
+
+
+POST
+/api/users/register
+Public self-registration (Candidate role only)
+
+
+
+PUT
+/api/users/{userId}
+Update user details
+
+
+Login API (P1-10)
+Lightweight authentication endpoints (scaffold, no Spring Security)
+
+
+
+GET
+/api/auth/me
+Get the current authenticated user's details
+
+
+
+POST
+/api/auth/refresh
+Issue a fresh token
+
+
+
+POST
+/api/auth/logout
+Log out the current user
+
+
+
+POST
+/api/auth/login
+Authenticate a user and issue a token
+
+
+Test Centre Management
+CRUD and status management for test centres (P1-33)
+
+
+
+GET
+/api/test-centres/{centreId}
+Get test centre details by ID
+
+
+
+GET
+/api/test-centres
+List test centres with optional city/status filters (paginated)
+
+
+
+PATCH
+/api/test-centres/{centreId}/status
+Change centre status (e.g., blacklist a centre)
+
+
+
+POST
+/api/test-centres
+Create a new test centre
+
+
+
+PUT
+/api/test-centres/{centreId}
+Update test centre details
+
+
+Analytics API - Reports (P1-22)
+Generation and retrieval of examination reports
+
+
+
+GET
+/api/reports/{reportId}
+Get examination report by ID
+
+
+
+POST
+/api/reports
+Generate a new examination report
+
+
+Exam Window API (P1-14)
+Scheduling and management of examination windows
+
+
+
+GET
+/api/exam-windows/{windowId}
+Get exam window details by ID
+
+
+
+GET
+/api/exam-windows
+List exam windows with optional programId/status filters (paginated)
+
+
+
+PATCH
+/api/exam-windows/{windowId}/status
+Change exam window status
+
+
+
+POST
+/api/exam-windows
+Create a new exam window
+
+
+
+PUT
+/api/exam-windows/{windowId}
+Update exam window details
+
+
+Seat Allocation API (P1-15)
+Seat allocation and hall ticket management for exam windows
+
+
+
+GET
+/api/seat-allocations/{allocationId}
+Get seat allocation details by ID
+
+
+
+GET
+/api/seat-allocations
+List seat allocations with optional windowId/candidateId filters (paginated)
+
+
+
+GET
+/api/seat-allocations/by-window/{windowId}
+List allocations for an exam window
+
+
+
+GET
+/api/seat-allocations/by-candidate/{candidateId}
+Get allocations for a candidate
+
+
+
+PATCH
+/api/seat-allocations/{allocationId}/status
+Change seat allocation status
+
+
+
+POST
+/api/seat-allocations
+Create a new seat allocation (auto-generates hall ticket number)
+
+
+
+PUT
+/api/seat-allocations/{allocationId}
+Reassign room/seat for an allocation
+
+
+Candidate API (P1-12)
+CRUD and status management for candidates
+
+
+
+GET
+/api/candidates/{id}
+Get candidate details by ID
+
+
+
+GET
+/api/candidates
+List candidates with optional name/status/qualification filters (paginated)
+
+
+
+PATCH
+/api/candidates/{id}/status
+Change candidate status (e.g., suspend or debar)
+
+
+
+POST
+/api/candidates
+Create a new candidate
+
+
+
+PUT
+/api/candidates/{id}
+Update candidate details
+
+
+Notification API (P1-23)
+User notification delivery and read-state management
+
+
+RBAC & Role Management API (P2-05)
+
+
+DELETE
+/api/roles/{roleId}/permissions/{permissionId}
+Remove a permission from a role
+
+
+
+GET
+/api/roles/{roleId}/permissions
+Get permissions for a role
+
+
+
+GET
+/api/users/{userId}/permissions
+Get effective permissions for a user
+
+
+
+GET
+/api/roles
+List all roles with their permissions
+
+
+
+POST
+/api/roles/{roleId}/permissions
+Add a permission to a role
+
+
+
+PUT
+/api/users/{userId}/role
+Assign or change a user's role
+
+
+Re-evaluation Workflow API (P2-04)
+
+
+GET
+/api/re-evaluations
+List re-evaluation requests, optionally filtered by candidateId (paginated)
+
+
+
+GET
+/api/re-evaluations/{reEvalId}
+Get re-evaluation request details by ID
+
+
+
+GET
+/api/re-evaluations/pending
+List pending re-evaluation requests for an exam window
+
+
+
+POST
+/api/re-evaluations
+Submit a re-evaluation request
+
+
+
+PUT
+/api/re-evaluations/{reEvalId}/complete
+Submit revised marks and outcome
+
+
+
+PUT
+/api/re-evaluations/{reEvalId}/assign
+Assign the re-evaluation to a new evaluator
+
+
+Marks Moderation & Dual Marking API (P2-03)
+
+
+GET
+/api/moderation/dashboard
+Moderation status dashboard (pending/escalated/resolved counts)
+
+
+
+GET
+/api/dual-marking/discrepancies
+List scripts whose marks discrepancy exceeds the threshold
+
+
+
+POST
+/api/moderation/escalate
+Escalate a discrepant script to a moderator
+
+
+
+POST
+/api/dual-marking/allocate
+Allocate a script to a second evaluator
+
+
+
+PUT
+/api/moderation/{scriptId}/resolve
+Submit moderated final marks
+
+
+Invigilator Management API (P2-02)
+
+
+DELETE
+/api/invigilator-assignments/{assignmentId}
+Remove an invigilator assignment
+
+
+
+GET
+/api/invigilators
+List invigilators with an optional centreId filter (paginated)
+
+
+
+GET
+/api/invigilator-assignments
+List assignments with optional windowId/centreId filters (paginated)
+
+
+
+POST
+/api/invigilators
+Register a user as an invigilator for a test centre
+
+
+
+POST
+/api/invigilator-assignments
+Assign an invigilator to a room for an exam window
+
+
+
+PUT
+/api/invigilator-assignments/{assignmentId}
+Update an assignment (change room or swap invigilator)
+
+
+Evaluation API (P1-18)
+
+
+GET
+/api/script-allocations
+List script allocations with optional evaluatorId filter (paginated)
+
+
+
+GET
+/api/marks-entries
+List marks entries with optional scriptId filter (paginated)
+
+
+
+GET
+/api/script-allocations/{scriptId}
+Get script allocation details by ID
+
+
+
+GET
+/api/script-allocations/by-evaluator/{evaluatorId}
+Get scripts assigned to an evaluator
+
+
+
+GET
+/api/marks-entries/by-script/{scriptId}
+Get all marks entries for a script
+
+
+
+PATCH
+/api/script-allocations/{scriptId}/status
+Change script allocation status
+
+
+
+PATCH
+/api/marks-entries/{marksId}/status
+Change marks entry status
+
+
+
+POST
+/api/script-allocations
+Allocate a script to an evaluator
+
+
+
+POST
+/api/marks-entries
+Create a marks entry
+
+
+
+POST
+/api/marks-entries/{marksId}/verify
+Verify a marks entry
+
+
+Result API (P1-19)
+
+
+GET
+/api/results
+List candidate results with optional candidateId/windowId filters (paginated)
+
+
+
+GET
+/api/results/{resultId}
+Get candidate result details by ID
+
+
+
+GET
+/api/results/by-window/{windowId}
+Get all results for an exam window
+
+
+
+GET
+/api/results/by-candidate/{candidateId}
+Get all results for a candidate
+
+
+
+PATCH
+/api/results/{resultId}/status
+Change candidate result status
+
+
+
+POST
+/api/results
+Create a single candidate result
+
+
+
+POST
+/api/results/{resultId}/re-evaluation
+Request re-evaluation of a result
+
+
+
+POST
+/api/results/publish
+Publish all results for an evaluation window
+
+
+
+POST
+/api/results/compute
+Trigger result computation for an evaluation window
+
+
+Hall Ticket Generation API (P2-01)
+
+
+GET
+/api/hall-tickets
+Look up hall tickets with optional candidateId/windowId filters (paginated)
+
+
+
+GET
+/api/hall-tickets/{hallTicketNumber}
+Retrieve hall ticket details by hall ticket number
+
+
+
+GET
+/api/hall-tickets/{hallTicketNumber}/download
+Download the hall ticket as a PDF
+
+
+
+POST
+/api/hall-tickets/generate
+Generate a hall ticket for a confirmed seat allocation
+
+
+
+Schemas
+UserRequest
+UserResponse
+UserRoleRequest
+TestCentreRequest
+TestCentreResponse
+SeatAllocationRequest
+SeatAllocationResponse
+ReEvaluationCompleteRequest
+ReEvaluationResponse
+ReEvaluationAssignRequest
+QuestionRequest
+QuestionResponse
+QuestionPaperRequest
+PaperQuestionResponse
+QuestionPaperResponse{
+paperId	[...]
+windowId	[...]
+programId	[...]
+paperCode	[...]
+totalMarks	[...]
+duration	[...]
+instructionsRef	[...]
+createdById	[...]
+status	[...]
+questions	[...]
+}
+CertificationProgramRequest
+CertificationProgramResponse
+ModerationResolveRequest
+ModerationCaseResponse
+InvigilatorAssignmentRequest
+InvigilatorAssignmentResponse
+ExamWindowRequest
+ExamWindowResponse
+ProgramEnrolmentUpdateRequest
+ProgramEnrolmentResponse
+EligibilityUpdateRequest
+CandidateRequest
+CandidateResponse
+ScriptAllocationRequest
+ScriptAllocationResponse
+AddPermissionRequest
+PermissionResponse
+CandidateResultRequest
+CandidateResultResponse
+ResultReEvaluationRequest
+PublishRequest
+ComputeRequest
+ReportRequest
+ReportResponse
+RenewalApplicationRequest
+RenewalApplicationResponse
+ReEvaluationRequest
+PaperQuestionRequest
+NotificationRequest
+NotificationResponse
+ModerationEscalateRequest
+MarksEntryRequest
+MarksEntryResponse
+VerifyRequest
+InvigilatorRequest
+InvigilatorResponse
+HallTicketGenerateRequest
+HallTicketResponse
+ProgramEnrolmentRequest
+EligibilityCheckRequest
+EligibilityCheckResponse
+DualMarkingAllocateRequest
+CertificateRequest
+CertificateResponse
+LoginResponse
+LoginRequest
+AuditLogRequest
+AuditLogResponse
+UserStatusRequest
+CentreStatusRequest
+AllocationStatusRequest
+ScriptStatusRequest
+ResultStatusRequest
+ReviewRequest
+QuestionStatusRequest
+PaperStatusRequest
+ProgramStatusRequest
+NotificationStatusRequest
+MarksStatusRequest
+ExamWindowStatusRequest
+CertificateStatusRequest
+CandidateStatusRequest
+Pageable
+PageUserResponse
+PageableObject
+SortObject
+UserPermissionsResponse
+PageTestCentreResponse
+PageSeatAllocationResponse
+PageScriptAllocationResponse
+RoleResponse
+PageCandidateResultResponse
+PageRenewalApplicationResponse
+PageReEvaluationResponse
+PageQuestionResponse
+PageQuestionPaperResponse
+PageCertificationProgramResponse
+PageNotificationResponse
+PageMarksEntryResponse
+PageInvigilatorResponse
+PageInvigilatorAssignmentResponse
+PageHallTicketResponse
+PageExamWindowResponse
+PageProgramEnrolmentResponse
+PageCertificateResponse
+PageCandidateResponse
+PageAuditLogResponse
